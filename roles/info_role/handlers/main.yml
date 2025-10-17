@@ -12,3 +12,7 @@
 - name: Info Collcted
   ansible.builtin.debug:
     msg: "{{ inventory_hostname }} Device Info Collected"
+
+- name: System Info Collected
+  ansible.builtin.debug:
+    msg: " System Info Collected for {{ inventory_hostname }} Device"

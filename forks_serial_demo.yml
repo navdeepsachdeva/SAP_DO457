@@ -1,19 +1,32 @@
 - name: Forks and Serial Demo
   hosts: all
+  gather_facts: false
+  max_fail_percentage: 35
+  # serial: 7
+  serial:
+    - 10%
+    - 30%
+    - 50%
+    - 100%
+  vars:
+    myhosts:
+      - git.lab.example.com
+      - junos2.lab.example.com
   tasks:
+
+  - name: is database OK
+    ansible.builtin.command: sleep 2
+    run_once: true
+    
   - name: Take down device from LB
     ansible.builtin.command: sleep 2
 
   - name: Update OS
     ansible.builtin.command: sleep 2
-    failed_when: inventory_hostname in myservers
+    failed_when: inventory_hostname in myhosts
 
   - name: Update other Config
     ansible.builtin.command: sleep 2
 
   - name: Put device back to LB
     ansible.builtin.command: sleep 2
-
-  # - name: is database OK
-  #  ansible.builtin.command: sleep 2
-    

@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<title> Hello {{ inventory_hostname }} </title>
+	</head>
+	<body>
+	## Collecting Info for {{ inventory_hostname }} ##
+
+          API           = {{ ansible_net_api }}
+          Hostname      = {{ ansible_facts.net_hostname | upper }}
+          Type          = {{ ansible_facts['net_iostype'] }}
+          Model         = {{ ansible_facts['net_model'] }}
+          Serial Number = {{ ansible_facts['net_serialnum'] }}
+          OS            = {{ ansible_facts['net_system'] }}
+          OS Version    = {{ ansible_facts['net_version'] }}
+          GE1 MAC 1     = {{ ansible_net_interfaces.GigabitEthernet1.macaddress }}
+          GE1 MAC 2     = {{ ansible_facts.net_interfaces.GigabitEthernet1.macaddress | default("Not Available") | length }}
+          GE1 MAC 3     = {{ ansible_facts['net_interfaces']['GigabitEthernet1']['macaddress'] }}
+          GE2 MAC       = {{ ansible_net_interfaces.GigabitEthernet2.macaddress | default("Not Available") }}
+          GE3 MAC       = {{ ansible_net_interfaces.GigabitEthernet3.macaddress | default("Not Available") }}
+	
+	</body>
+</html>
