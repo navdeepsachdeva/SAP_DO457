@@ -1,0 +1,23 @@
+- name: Without Handlers Dependency Task
+  hosts: iosxe1*
+  gather_facts: false
+  tasks:
+    - name: Change Description
+      cisco.ios.ios_interfaces:
+        config:
+          - name: GigabitEthernet1
+            description: "Hello_GE11"
+      register: pavol_out
+
+    - name: Print Previous Task Output
+      ansible.builtin.debug:
+        # var: pavol_out.changed
+        var: pavol_out
+
+    - name: Configure the login banner
+      cisco.ios.ios_banner:
+        banner: login
+        text: "Any Damn Thing"
+        state: present
+      when: pavol_out.changed
+      # when: pavol_out.changed == true

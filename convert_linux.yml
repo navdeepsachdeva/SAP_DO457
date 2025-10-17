@@ -1,0 +1,20 @@
+- name: Convert Ad-Hoc to Play
+  hosts: utility.lab.example.com
+  gather_facts: false
+  remote_user: devops
+  tasks:
+    - name: Create First File
+      ansible.builtin.copy:
+        content: "Hello Raul "
+        dest: /tmp/f1
+      # ansible.builtin.copy: content="Hello Denis" dest=/tmp/f1
+      # INI Ad-Hoc Command Format 
+
+    - name: Create Second File
+      ansible.builtin.copy:
+        content: "Hello Denis 1"
+        dest: /tmp/f2
+
+
+
+## ansible -i denis_inventory utility.lab.example.com --module-name ansible.builtin.copy --args 'content="Hello Denis" dest=/tmp/f1' --user devops

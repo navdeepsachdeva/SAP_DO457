@@ -1,0 +1,35 @@
+- name: Multiple Lines Long Text
+  hosts: iosxe1*
+  gather_facts: false
+  tasks:
+    - name: Configure the login banner Ugly
+      cisco.ios.ios_banner:
+        banner: login
+        text: There are 6 people in class and styding Ansible DO 457 and from Different COuntries and they are Denis, Pavol, Marius, Raul, Sumarto, Michal
+        state: present
+
+    - name: Configure the login banner RESET
+      cisco.ios.ios_banner:
+        banner: login
+        text: RESET ME
+        state: present
+
+    - name: Configure the login banner Readable
+      cisco.ios.ios_banner:
+        banner: login
+        text: >
+          There are 6 people in class
+          and styding Ansible DO 457 and
+          from Different COuntries and
+          they are Denis, Pavol, Marius, Raul, Sumarto, Michal
+        state: present
+
+    - name: Configure the login banner KEEP Format
+      cisco.ios.ios_banner:
+        banner: login
+        text: |
+          There are 6 people in class
+          and styding Ansible DO 457 and
+          from Different COuntries and
+          they are Denis, Pavol, Marius, Raul, Sumarto, Michal
+        state: present

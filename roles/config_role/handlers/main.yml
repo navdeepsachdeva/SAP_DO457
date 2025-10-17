@@ -1,0 +1,22 @@
+---
+# handlers file for config_role
+
+- name: Nobody Intersted
+  ansible.builtin.debug:
+    msg: "Nobody Intersted in ME"
+
+- name: Banner Changed
+  ansible.builtin.debug:
+    msg: "Success Banner Changed"
+
+- name: Description Changed
+  ansible.builtin.debug:
+    msg: "Success Description Changed"
+
+- name: IOS Settings Saved
+  cisco.ios.ios_config:
+    save_when: always
+
+- name: Some Config Changed
+  ansible.builtin.debug:
+    msg: "Some Config Must have changed"

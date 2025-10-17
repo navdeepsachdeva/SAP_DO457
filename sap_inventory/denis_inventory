@@ -1,0 +1,45 @@
+## INI Format Inventory
+
+workstation.lab.example.com
+utility.lab.example.com
+
+[git]
+git.lab.example.com
+172.25.250.5
+
+[all:vars]
+somevar="Level-3 Inventory file"
+
+[cisco]
+iosxe1.lab.example.com
+iosxe2.lab.example.com somevar="Level-8 Inventory file IOSXE2"
+
+[arista]
+arista1.lab.example.com
+arista2.lab.example.com
+
+[routers:children]
+cisco
+arista
+
+[juniper]
+junos1.lab.example.com
+junos2.lab.example.com
+
+# [range]
+# 192.168.[1:4].[5:8]
+# system[A:F].lab.example.com
+# [cisco:vars]
+# ansible_network_os=cisco.ios.ios
+
+
+# [arista:vars]
+# ansible_network_os=arista.eos.eos
+# 
+# [juniper:vars]
+# ansible_network_os=junipernetworks.junos.junos
+# ansible_connection=ansible.netcommon.netconf
+# [routers:vars]
+# ansible_connection=ansible.netcommon.network_cli
+
+

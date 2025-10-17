@@ -1,0 +1,59 @@
+- name: Play on IOSXE1
+  hosts: iosxe1*
+  gather_facts: false
+  # remote_user: user1
+  #
+  tasks:
+    - name: Change Description on GE1
+      cisco.ios.ios_interfaces:
+        config:
+          - name: GigabitEthernet1
+            description: "Hello_GE1"
+
+    - name: Configure the login banner
+      cisco.ios.ios_banner:
+        banner: login
+        text: "Any Damn Thing 11"
+        state: present
+
+- name: Play on IOSXE2
+  hosts: iosxe2*
+  gather_facts: false
+  # remote_user: user2
+  tasks:
+    - name: Change Description on GE2
+      cisco.ios.ios_interfaces:
+        config:
+          - name: GigabitEthernet2
+            description: "Hello_GE2"
+
+    - name: Configure the motd banner
+      cisco.ios.ios_banner:
+        banner: motd
+        text: "Good Morning"
+        state: present
+
+- name: Play on Juniper Device
+  hosts: junos1*
+  gather_facts: false
+  # remote_user: user3
+  tasks:
+    - name: Enable the netconf service on port 830
+      junipernetworks.junos.junos_netconf:
+        netconf_port: 830
+        state: present
+      vars:
+        ansible_connection: ansible.netcommon.network_cli
+
+    - name: Configure a MOTD banner
+      junipernetworks.junos.junos_banner:
+        banner: motd
+        text: This is an Ansible-managed node
+        state: present
+
+    # - name: Disable the netconf service on port 830
+    #   vars:
+    #     ansible_connection: ansible.netcommon.network_cli
+    #   junipernetworks.junos.junos_netconf:
+    #     netconf_port: 830
+    #     state: absent

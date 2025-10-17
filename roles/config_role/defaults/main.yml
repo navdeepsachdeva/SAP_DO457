@@ -1,0 +1,8 @@
+---
+# defaults file for config_role
+
+
+config_role_ge1_name: GigabitEthernet1
+config_role_ge1_desc: "Level-2 GE1 Data"
+config_role_banner_type: login
+config_role_banner_text: "Level-2 Banner Text"

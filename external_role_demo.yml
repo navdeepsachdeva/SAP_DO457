@@ -1,0 +1,14 @@
+- name: External ROles Demo
+  hosts: iosxe1*
+  gather_facts: false
+  roles:
+    - role: maxrainer.cisco_iosupgrade
+    - role: cisco.catalystwan.health_checks
+    - role: cisco.fmcansible.device_backup
+
+
+  tasks:
+    - name: Get all access policies
+      cisco.fmcansible.fmc_access_policies:
+        operation: getAllAccessPolicies
+        register_as: access_policies

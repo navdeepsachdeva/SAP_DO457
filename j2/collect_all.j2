@@ -1,0 +1,27 @@
+<html>
+	<head>
+		<title> Hello {{ inventory_hostname }} </title>
+	</head>
+	<body>
+
+{% for sys in groups["cisco"] %}
+
+	## Collecting Info for {{ hostvars[sys].inventory_hostname }} ##
+
+  Host		= {{ sys }}
+  API           = {{ hostvars[sys].ansible_net_api }}
+  Hostname      = {{ hostvars[sys].ansible_facts.net_hostname | upper }}
+  Type          = {{ hostvars[sys].ansible_facts['net_iostype'] }}
+  Model         = {{ hostvars[sys].ansible_facts['net_model'] }}
+  Serial Number = {{ hostvars[sys].ansible_facts['net_serialnum'] }}
+  OS            = {{ hostvars[sys].ansible_facts['net_system'] }}
+  OS Version    = {{ hostvars[sys].ansible_facts['net_version'] }}
+  GE1 MAC 1     = {{ hostvars[sys].ansible_net_interfaces.GigabitEthernet1.macaddress }}
+  GE1 MAC 2     = {{ hostvars[sys].ansible_facts.net_interfaces.GigabitEthernet1.macaddress | default("Not Available") | length }}
+  GE1 MAC 3     = {{ hostvars[sys].ansible_facts['net_interfaces']['GigabitEthernet1']['macaddress'] }}
+  GE2 MAC       = {{ hostvars[sys].ansible_net_interfaces.GigabitEthernet2.macaddress | default("Not Available") }}
+  GE3 MAC       = {{ hostvars[sys].ansible_net_interfaces.GigabitEthernet3.macaddress | default("Not Available") }}
+	
+{% endfor %}
+	</body>
+</html>

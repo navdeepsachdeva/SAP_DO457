@@ -1,0 +1,58 @@
+- name: Facts Demo for Multiple Devices
+  hosts: iosxe1*,workstation*
+  gather_facts: false
+
+  tasks:
+    - name: Collect Facts Manually for CISCO {{ inventory_hostname }}
+      cisco.ios.ios_facts:
+        gather_subset: all
+      when: inventory_hostname == "iosxe1.lab.example.com"
+      # when: ansible_network_os == 'cisco.ios.ios'
+
+    - name: Collect Facts Manually for Linux {{ inventory_hostname }}
+      ansible.builtin.setup:
+        gather_subset: all
+      when: inventory_hostname == "workstation.lab.example.com"
+
+    - name: PRINT
+      ansible.builtin.debug:
+        msg: "{{ ansible_net_interfaces.GigabitEthernet1 }}"
+      when: inventory_hostname == "iosxe1.lab.example.com"
+
+    - name: Print Facts for Cisco Device
+      ansible.builtin.copy:
+        dest: ./info/{{ inventory_hostname }}.txt
+        content: |
+          API           = {{ ansible_net_api }}
+          Hostname      = {{ ansible_facts.net_hostname }}
+          Type          = {{ ansible_facts['net_iostype'] }}
+          Model         = {{ ansible_facts['net_model'] }}
+          Serial Number = {{ ansible_facts['net_serialnum'] }}
+          OS            = {{ ansible_facts['net_system'] }}
+          OS Version    = {{ ansible_facts['net_version'] }}
+          GE1 MAC 1     = {{ ansible_net_interfaces.GigabitEthernet1.macaddress }}
+          GE1 MAC 2     = {{ ansible_facts.net_interfaces.GigabitEthernet1.macaddress }}
+          GE1 MAC 3     = {{ ansible_facts['net_interfaces']['GigabitEthernet1']['macaddress'] }}
+          GE2 MAC       = {{ ansible_net_interfaces.GigabitEthernet2.macaddress }}
+      when: inventory_hostname == "iosxe1.lab.example.com"
+
+    - name: Configure the login banner
+      cisco.ios.ios_banner:
+        banner: login
+        text: "Any Damn"
+        state: present
+      when:
+        # - ansible_facts['net_version'] >= "17"
+        - inventory_hostname == "iosxe1.lab.example.com"
+      
+    - name: Print Facts for Linux Device
+      ansible.builtin.copy:
+        dest: ./me/{{ inventory_hostname }}.txt
+        content: |
+          ARCH 1  = {{ ansible_architecture }}
+          ARCH 2  = {{ ansible_facts.architecture }}
+          ARCH 3  = {{ ansible_facts['architecture'] }}
+          IP      = {{ ansible_facts['default_ipv4']['address'] }}
+      when: inventory_hostname == "workstation.lab.example.com"
+
+         

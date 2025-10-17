@@ -1,0 +1,26 @@
+somevar: "Level-14 Play vars_files"
+# somevar: "CHANGE_ME"
+
+simple_list:
+  - GigabitEthernet1
+  - GigabitEthernet2
+
+complex_list:
+  - name: GigabitEthernet1
+    desc: GigabitEthernet1_Data11111
+  - name: GigabitEthernet2
+    desc: GigabitEthernet2_Data222222
+
+nic_dict:
+  GigabitEthernet1: Dic1_Data1
+  GigabitEthernet2: Dic2_Data2
+
+vlan:
+  hypervisors:
+    name: physical-servers
+    mtu: 9000
+    id: 1000
+  vms:
+    name: virtual-servers
+    mtu: 1500
+    id: 2000

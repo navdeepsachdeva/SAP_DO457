@@ -1,0 +1,23 @@
+- name: Filters Demo
+  hosts: iosxe1*
+  gather_facts: false
+  vars:
+    myips:
+    - 172.25.250.254/16
+    - 10.10.2.20/8
+    - 10.10.2.256/8
+    - 88.22.55.44/8
+    - 192.168.2.15/24
+    - 192.268.2.15/24
+    - fe80::a1c0:e2e5:a201:8cfa/64
+    - fe80::5054:ff:fe00:fa09/64
+    - 100.24.45.24
+
+  tasks:
+    - name: PRINT
+      ansible.builtin.debug:
+        msg: "{{ myips | ansible.utils.ipv4('private') | ansible.utils.ipv4('network') }}"
+        # msg: "{{ myips | ansible.utils.ipv4('private') | ansible.utils.ipv4('broadcast') }}"
+        # msg: "{{ myips | ansible.utils.ipv4('private') }}"
+        # msg: "{{ myips | ansible.utils.ipv4('public') }}"
+        # msg: "{{ myips | ansible.utils.ipaddr | ansible.utils.ipv4 }}"

@@ -1,0 +1,39 @@
+- name: failed_when condition/ansible.builtin.fail/ansible.builtin.assert Demo
+  hosts: iosxe1*
+  gather_facts: true
+  tasks:
+    - name: Test reachability to 198.51.100.251
+      cisco.ios.ios_ping:
+        dest: 172.25.250.24
+
+    - name: Change Description
+      cisco.ios.ios_interfaces:
+        config:
+          - name: GigabitEthernet1
+            description: "Hello_GE1"
+            enabled: true
+      register: captured
+      # failed_when: ansible_facts['net_version'] >= "16"
+
+    # - name: Stop Playbook via fail modules
+    #   ansible.builtin.fail:
+    #     msg: "Pre-Requisites check OS Version {{ ansible_facts['net_version'] }}"
+    #   when: ansible_facts['net_version'] > "16"
+
+    - name: Stop/Continue Playbook via assert modules
+      ansible.builtin.assert:
+        that:
+          - ansible_facts['net_version'] > "16"
+          - captured.changed
+        success_msg: "Good to Go Boys"
+        fail_msg: "Pre-Requisites {{ ansible_facts['net_version'] }}  OR {{ captured.changed }}"
+
+    - name: Configure the login banner
+      cisco.ios.ios_banner:
+        banner: login
+        text: "Any Damn Thing"
+        state: present
+
+    - name: IOS Settings Saved
+      cisco.ios.ios_config:
+        save_when: always

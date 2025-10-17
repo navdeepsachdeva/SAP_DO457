@@ -1,0 +1,40 @@
+- name: changed_when Handlers Dependency Task
+  hosts: iosxe1*
+  gather_facts: false
+  tasks:
+    - name: Change Description
+      cisco.ios.ios_interfaces:
+        config:
+          - name: GigabitEthernet1
+            description: "Hello_GE111"
+      changed_when: meme is not defined
+      # Change Label from ok -> changed notify handlers
+      notify:
+        - Description Changed
+        - IOS Settings Saved
+
+    - name: Configure the login banner
+      cisco.ios.ios_banner:
+        banner: login
+        text: "Any Damn Thing 11"
+        state: present
+      notify:
+        - IOS Settings Saved
+        - Banner Changed
+
+  handlers:
+    - name: Nobody Intersted
+      ansible.builtin.debug:
+        msg: "Nobody Intersted in ME"
+
+    - name: Banner Changed
+      ansible.builtin.debug:
+        msg: "Success Banner Changed"
+
+    - name: Description Changed
+      ansible.builtin.debug:
+        msg: "Success Description Changed"
+
+    - name: IOS Settings Saved
+      cisco.ios.ios_config:
+        save_when: always

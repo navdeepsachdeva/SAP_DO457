@@ -1,0 +1,7 @@
+- name: Test Ansible Controller Inventory Variables
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Print the Values
+      ansible.builtin.debug:
+        msg: "{{ inventory_hostname }} ==== {{ var1 }}"

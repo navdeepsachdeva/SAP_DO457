@@ -1,0 +1,46 @@
+- name: Template Demo
+  hosts: cisco,arista
+  # hosts: iosxe*
+  gather_facts: false
+  vars_files:
+    - vars/outside_vars.yml
+
+  tasks:
+    # - name: Generate Commands via template
+    #   ansible.builtin.template:
+    #     src: j2/generator.j2
+    #     dest: ./system_info/commands.txt
+    #   when: inventory_hostname in groups["cisco"]
+
+    # - name: Execute Commands 
+    #   cisco.ios.ios_config:
+    #     src: ./system_info/commands.txt
+    #   when: inventory_hostname in groups["cisco"]
+    
+    - name: Execute Commands in ONE GO
+      cisco.ios.ios_config:
+        src: j2/generator.j2
+      when: inventory_hostname in groups["cisco"]
+
+    # - name: Create Folder
+    #   ansible.builtin.file:
+    #     path: ./system_info
+    #     state: directory
+    #     mode: '0755'
+
+    # - name: Collect CISCO Facts Manually
+    #   cisco.ios.ios_facts:
+    #     gather_subset: all
+    #   when: inventory_hostname in groups["cisco"]
+
+    # - name: Print Facts ALL Cisco Device
+    #   ansible.builtin.template:
+    #     dest: ./system_info/cisco_info.txt
+    #     src: ./j2/collect_all.j2
+    #   when: inventory_hostname in groups["cisco"]
+
+    # - name: Print Facts for Cisco Device
+    #   ansible.builtin.template:
+    #     dest: ./system_info/{{ inventory_hostname }}.txt
+    #     src: ./j2/collect_single.j2
+    #   when: inventory_hostname in groups["cisco"]

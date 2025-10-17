@@ -1,0 +1,32 @@
+- name: Ignore Errors Demo
+  hosts: iosxe1*
+  gather_facts: false
+  # ignore_errors: true
+  # ignore_errors PLAY Level
+  tasks:
+    - name: Test reachability to 198.51.100.251
+      cisco.ios.ios_ping:
+        dest: 198.51.100.251
+      ignore_errors: true
+      # ignore_errors Task Level
+
+    - name: Some Task
+      ansible.builtin.debug:
+        msg: "{{ wewe }}"
+      ignore_errors: true
+
+    - name: Change Description
+      cisco.ios.ios_interfaces:
+        config:
+          - name: GigabitEthernet11
+            description: "Hello_GE111"
+
+    - name: Configure the login banner
+      cisco.ios.ios_banner:
+        banner: loginn
+        text: "Any Damn Thing 11"
+        state: present
+
+    - name: IOS Settings Saved
+      cisco.ios.ios_config:
+        save_whennn: always

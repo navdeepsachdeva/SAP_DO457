@@ -1,0 +1,67 @@
+- name: Roles Demo
+  hosts: iosxe1*
+  gather_facts: true
+
+  handlers:
+    - name: Simple Handler
+      ansible.builtin.debug:
+        msg: "Simple Handler to TEST in check Mode"
+
+    - name: Task Sleep
+      ansible.builtin.debug:
+        msg: "Sleep Handlers for Custom Tasks"
+
+    - name: services_down
+      ansible.builtin.debug:
+        msg: "Instagram Down SLeep Now"
+
+    - name: services_up
+      ansible.builtin.debug:
+        msg: "Instagram UP STart Wasting Time"
+
+  pre_tasks:
+    - name: Test reachability to 198.51.100.251
+      cisco.ios.ios_ping:
+        dest: 172.25.250.24
+
+    - name: Stop/Continue Playbook via assert modules
+      ansible.builtin.assert:
+        that:
+          - ansible_facts['net_version'] < "16"
+        success_msg: "Good to Go Boys"
+        fail_msg: "Pre-Requisites {{ ansible_facts['net_version'] }}  OR {{ captured.changed }}"
+
+    - name: Wait before you start
+      ansible.builtin.command: sleep 4
+      notify:
+        - service_down
+        
+  roles:
+    - role: config_role
+      config_role_ge1_desc: "Play Override"
+
+
+  tasks:
+    - name: Extra Task
+      ansible.builtin.debug:
+        msg: "SomeTHing"
+      changed_when: wewe is not defined
+      notify:
+        - Simple Handler
+
+    - name: Import Include a Role
+      ansible.builtin.import_role:
+      # ansible.builtin.include_role:
+        name: some_role
+      when: wewe is not defined
+
+    - name: Unneccasry Task SLeeping
+      ansible.builtin.command: sleep 4
+      notify:
+        - Task Sleep
+
+  post_tasks:
+    - name: CHeck Everything Before Releasing
+      ansible.builtin.command: sleep 4
+      notify:
+        - service_up

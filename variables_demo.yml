@@ -1,0 +1,38 @@
+- name: Variable Demo
+  hosts: cisco,arista
+  gather_facts: false
+  # Level 12 BAD HARDCODED
+  vars:
+    somevar: "Level-12 Play vars"
+    we: us
+
+  # Level 13 only for Development
+  vars_prompt:
+    - name: somevar
+      prompt: "What is Your Level ?"
+      private: false
+
+  vars_files:
+    - ./vars/outside_vars.yml
+
+  tasks:
+    - name: Print Variable
+      ansible.builtin.debug:
+        msg: "{{ inventory_hostname }} == {{ somevar }}"
+        # var: somevar
+
+    # - name: Change Description
+    #   cisco.ios.ios_interfaces:
+    #     config:
+    #       - name: GigabitEthernet1
+    #         description: "Hello_GE11"
+    #   register: captured
+
+    # - name: Print Previous Task Output
+    #   ansible.builtin.debug:
+    #     msg: "{{ captured  }}"
+
+    # - name: Print Previous Task Specific Output
+    #   ansible.builtin.debug:
+    #     msg: "{{ captured.commands }} {{ vlan.hypervisors.name }} {{ vlan['vms']['mtu'] }}"
+    #   # when: captured.changed

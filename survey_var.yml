@@ -1,0 +1,12 @@
+- name: Variable Survey Demo
+  hosts: all
+  gather_facts: false
+  # vars_prompt:
+  #   - name: user_name
+  #     prompt: "What is Your Level ?"
+  #     private: false
+
+  tasks:
+    - name: Print Variable
+      ansible.builtin.debug:
+        msg: "{{ inventory_hostname }} == {{ user_name }} == {{ user_colour }}"

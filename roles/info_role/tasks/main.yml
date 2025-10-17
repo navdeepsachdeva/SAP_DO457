@@ -1,0 +1,39 @@
+---
+# tasks file for info_role
+
+- name: info_role - Wait Before you Start
+  ansible.builtin.command: sleep 4
+  notify:
+    - Enough Sleep
+
+- name: info_role - Collect Facts Manually
+  cisco.ios.ios_facts:
+    gather_subset: "{{ info_role_subset }}"
+
+- name: info_role - Create Folder to Store System Info
+  ansible.builtin.file:
+    path: "{{ info_role_folder }}"
+    state: directory
+    mode: '0755'
+  notify:
+    - Info Folder Created
+
+- name: info_role - Print Facts for Cisco Device
+  ansible.builtin.copy:
+    dest: "./{{ info_role_folder }}/{{ inventory_hostname }}.txt"
+    content: |
+
+      API           = {{ ansible_net_api }}
+      Hostname      = {{ ansible_facts.net_hostname | upper }}
+      Type          = {{ ansible_facts['net_iostype'] }}
+      Model         = {{ ansible_facts['net_model'] }}
+      Serial Number = {{ ansible_facts['net_serialnum'] }}
+      OS            = {{ ansible_facts['net_system'] }}
+      OS Version    = {{ ansible_facts['net_version'] }}
+      GE1 MAC 1     = {{ ansible_net_interfaces.GigabitEthernet1.macaddress }}
+      GE1 MAC 2     = {{ ansible_facts.net_interfaces.GigabitEthernet1.macaddress | default("Not Available") | length }}
+      GE1 MAC 3     = {{ ansible_facts['net_interfaces']['GigabitEthernet1']['macaddress'] }}
+      GE2 MAC       = {{ ansible_net_interfaces.GigabitEthernet2.macaddress | default("Not Available") }}
+      GE3 MAC       = {{ ansible_net_interfaces.GigabitEthernet3.macaddress | default("Not Available") }}
+  notify:
+    - Info Collcted

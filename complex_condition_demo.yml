@@ -1,0 +1,24 @@
+- name: Conditions Demo
+  hosts: iosxe1*
+  gather_facts: true
+  vars_files:
+    - vars/outside_vars.yml
+  tasks:
+    - name: Change Description on GE1
+      cisco.ios.ios_interfaces:
+        config:
+          - name: GigabitEthernet1
+            description: "Hello_GE11"
+      when: ansible_network_os == "cisco.ios.ios"
+      register: captured
+
+    - name: Configure the login banner
+      cisco.ios.ios_banner:
+        banner: login
+        text: "Any Damn Thing"
+        state: present
+      when:
+        - ansible_network_os == "cisco.ios.ios"
+        - ansible_facts['net_version'] > "18.0" or captured.changed or "GigabitEthernet1" in simple_list 
+      # when: ansible_network_os == "cisco.ios.ios" and ansible_facts['net_version'] > "18.0"
+

@@ -1,0 +1,44 @@
+- name: Loops Demo
+  hosts: iosxe1*
+  gather_facts: false
+  vars_files:
+    - vars/outside_vars.yml
+  tasks:
+    - name: Print Simple List
+      ansible.builtin.debug:
+        msg: "{{ item }}"
+      # with_items: "{{ simple_list }}"
+      loop: "{{ simple_list }}"
+
+    - name: Print Complex List
+      ansible.builtin.debug:
+        msg: "{{ item.name }} // {{ item['desc'] }}"
+      # with_list: "{{ complex_list }}"
+      loop: "{{ complex_list }}"
+
+    - name: Print NIC Dictonary
+      ansible.builtin.debug:
+        msg: "{{ item['key'] }} == {{ item['value'] }}"
+      # with_dict: "{{ nic_dict }}"
+      loop: "{{ nic_dict | dict2items }}"
+
+    - name: Ping hosts
+      cisco.ios.ios_ping:
+        dest: "{{ item }}"
+      register: captured
+      loop: 
+        - arista1.lab.example.com
+        - arista2.lab.example.com
+        - iosxe2.lab.example.com
+
+    - name: Print Output
+      ansible.builtin.debug:
+        msg: "{{ captured.results }}"
+        # msg: "{{ captured }}"
+
+    - name: Print Complex List
+      ansible.builtin.debug:
+        msg: "{{ item.commands }} AND {{ item.item }} -- {{ item.packets_tx }} -- {{ item.rtt.avg }}"
+      loop: "{{ captured.results }}"
+
+## Loop came in Ansible 2.5

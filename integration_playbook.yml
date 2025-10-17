@@ -1,0 +1,29 @@
+
+- name: Import a Playbook
+  ansible.builtin.import_playbook: multiple_lines.yml
+
+- name: Integration Large Playbook
+  hosts: iosxe1*
+  gather_facts: false
+  tasks:
+    # - name: Import a Task File
+    #   ansible.builtin.import_tasks:
+    #     file: tasks/config_tasks.yml
+    #   when: meme is not defined
+
+    # - name: Include a Task File
+    #   ansible.builtin.include_tasks:
+    #     file: tasks/info_tasks.yml
+    #   when: meme is not defined
+
+    - name: Loop Task Files
+      # ansible.builtin.import_tasks:
+      ansible.builtin.include_tasks:
+        file: "{{ item }}"
+      when: meme is not defined
+      loop:
+        - tasks/config_tasks.yml
+        - tasks/info_tasks.yml
+
+- name: Import another Playbook with multiple play
+  ansible.builtin.import_playbook: multiple_play.yml

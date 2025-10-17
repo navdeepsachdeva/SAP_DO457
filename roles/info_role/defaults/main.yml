@@ -1,0 +1,5 @@
+---
+# defaults file for info_role
+
+info_role_subset: all
+info_role_folder: ./sys_info/

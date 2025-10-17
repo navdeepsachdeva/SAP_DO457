@@ -1,0 +1,19 @@
+- name: Forks and Serial Demo
+  hosts: all
+  tasks:
+  - name: Take down device from LB
+    ansible.builtin.command: sleep 2
+
+  - name: Update OS
+    ansible.builtin.command: sleep 2
+    failed_when: inventory_hostname in myservers
+
+  - name: Update other Config
+    ansible.builtin.command: sleep 2
+
+  - name: Put device back to LB
+    ansible.builtin.command: sleep 2
+
+  # - name: is database OK
+  #  ansible.builtin.command: sleep 2
+    

@@ -1,0 +1,17 @@
+---
+# handlers file for some_role
+- name: Handler MOTD 1
+  ansible.builtin.debug:
+    msg: "Success Execution MOTD 1"
+ 
+- name: Handler MOTD 2
+  ansible.builtin.debug:
+    msg: "Success Execution MOTD 2"
+ 
+- name: Handler MOTD 3
+  ansible.builtin.debug:
+    msg: "Success Execution MOTD 3"
+
+- name: Handler MOTD 4
+  ansible.builtin.debug:
+    msg: "Success Execution MOTD 4"

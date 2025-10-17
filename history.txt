@@ -1,0 +1,966 @@
+    1  ping git
+    2  cd sap/
+    3  ansible all --list-hosts
+    4  dnf install ansible-core -y
+    5  sudo dnf install ansible-core -y
+    6  dnf provides ansible 
+    7  dnf provides ansible-playbook
+    8  dnf provides ansible-inventory
+    9  sudo dnf install python3
+   10  python3 --version
+   11  ansible --version
+   12  ll /etc/ansible/
+   13  dnf provides /etc/ansible/
+   14  ll /etc/ansible/
+   15  ansible all --list-hosts
+   16  ansible-inventory --graph
+   17  ansible all --list-hosts
+   18  ansible-inventory --graph
+   19  ansible all --list-hosts
+   20  ansible-inventory --graph
+   21  ansible all --list-hosts
+   22  ansible all --list-hosts --help | grep inventory
+   23  ansible all --list-hosts --inventory ./denis_inventory 
+   24  ansible-inventory --graph -i ./denis_inventory
+   25  ansible workstation.lab.example.com --list-hosts --inventory ./denis_inventory 
+   26  ansible utility.lab.example.com --list-hosts --inventory ./denis_inventory 
+   27  dnf provides /usr/lib/python3.9/site-packages/ansible/modules/ | less
+   28  ansible utility.lab.example.com --help | grep module
+   29  ansible utility.lab.example.com --module-name ansible.builtin.copy --help | grep args
+   30  ansible utility.lab.example.com --module-name ansible.builtin.copy --args 'content="Hello Mical"'
+   31  ansible -i denis_inventory utility.lab.example.com --module-name ansible.builtin.copy --args 'content="Hello Mical"' 
+   32  ansible -i denis_inventory utility.lab.example.com --module-name ansible.builtin.copy --args 'content="Hello Michal"' 
+   33  ansible -i denis_inventory utility.lab.example.com --module-name ansible.builtin.copy --args 'content="Hello Michal" dest=/tmp/f1' 
+   34  ansible -i denis_inventory utility.lab.example.com --module-name ansible.builtin.copy --args 'content="Hello Raul" dest=/tmp/f1' 
+   35  cleat
+   36  clear
+   37  ansible -i denis_inventory utility.lab.example.com --module-name ansible.builtin.copy --args 'content="Hello Denis" dest=/tmp/f1' -vvv
+   38  clear
+   39  ansible -i denis_inventory utility.lab.example.com --module-name ansible.builtin.copy --args 'content="Hello Raul" dest=/tmp/f1' -vvv
+   40  clear
+   41  ansible -i denis_inventory utility.lab.example.com --module-name ansible.builtin.copy --args 'content="Hello Denis" dest=/tmp/f1' --user devops -vvv
+   42  ansible -i denis_inventory utility.lab.example.com --module-name ansible.builtin.copy --args 'content="Hello Denis" dest=/tmp/f1' --user devops 
+   43  cat /home/student/.vimrc
+   44  vim /home/student/.vimrc
+   45  cat /home/student/.vimrc
+   46  ansible-playbook convert_linux.yml 
+   47  ansible-playbook convert_linux.yml --syntax-check
+   48  ansible-playbook convert_linux.yml --syntax-check -i denis_inventory 
+   49  ansible-playbook convert_linux.yml  -i denis_inventory 
+   50  ansible-doc copy
+   51  ansible-playbook convert_linux.yml  -i denis_inventory 
+   52  ansible-playbook convert_linux.yml --syntax-check -i denis_inventory 
+   53  ansible-playbook convert_linux.yml  -i denis_inventory --check 
+   54  ansible-playbook convert_linux.yml  -i denis_inventory 
+   55  ansible-playbook convert_linux.yml  -i denis_inventory --check 
+   56  ansible-playbook convert_linux.yml  -i denis_inventory 
+   57  ls /usr/lib/python3.9/site-packages/ansible/modules
+   58  ls /usr/lib/python3.9/site-packages/ansible/plugins/
+   59  ls /usr/lib/python3.9/site-packages/ansible/plugins/connection/
+   60  ls /usr/lib/python3.9/site-packages/ansible/modules
+   61  dnf provides ansible-navigator 
+   62  ansible-playbook convert_linux.yml  -i denis_inventory 
+   63  python --version
+   64  podman images
+   65  podman rmi ae6ba883d042
+   66  podman images
+   67  podman pull hub.lab.example.com/ee-minimal-rhel8
+   68  podman login hub.lab.example.com
+   69  podman pull hub.lab.example.com/ee-minimal-rhel8
+   70  podman pull hub.lab.example.com/ee-supported-rhel8
+   71  podman images
+   72  podman run --rm -it hub.lab.example.com/ee-minimal-rhel8 bash
+   73  ansible-navigator --help
+   74  ansible-navigator run convert_linux.yml 
+   75  ansible-navigator run convert_linux.yml --help | grep eei
+   76  podman images
+   77  ansible-navigator run convert_linux.yml --execution-environment-image hub.lab.example.com/ee-minimal-rhel8:latest
+   78  ansible-navigator run convert_linux.yml --execution-environment-image hub.lab.example.com/ee-minimal-rhel8:latest -i denis_inventory 
+   79  ansible-navigator run convert_linux.yml --execution-environment-image hub.lab.example.com/ee-minimal-rhel8:latest -i denis_inventory --help | mode
+   80  ansible-navigator run convert_linux.yml --execution-environment-image hub.lab.example.com/ee-minimal-rhel8:latest -i denis_inventory --help | grep mode
+   81  ansible-navigator run convert_linux.yml --execution-environment-image hub.lab.example.com/ee-minimal-rhel8:latest -i denis_inventory --help | grep -A5 mode
+   82  ansible-navigator run convert_linux.yml --execution-environment-image hub.lab.example.com/ee-minimal-rhel8:latest -i denis_inventory --help | grep -A5 '--mode'
+   83  ansible-navigator run convert_linux.yml --execution-environment-image hub.lab.example.com/ee-minimal-rhel8:latest -i denis_inventory --help | grep -A5 'mode'
+   84  ansible-navigator run convert_linux.yml --execution-environment-image hub.lab.example.com/ee-minimal-rhel8:latest -i denis_inventory --mode stdout
+   85  ansible-navigator run convert_linux.yml --execution-environment-image hub.lab.example.com/ee-minimal-rhel8:latest -i denis_inventory --mode stdout --help | grep pull-policy
+   86  ansible-navigator run convert_linux.yml --execution-environment-image hub.lab.example.com/ee-minimal-rhel8:latest -i denis_inventory --mode stdout --help | grep -A7 pull-policy
+   87  ansible-navigator run convert_linux.yml --execution-environment-image hub.lab.example.com/ee-minimal-rhel8:latest -i denis_inventory --mode stdout --pull-policy missing
+   88  ansible-playbook convert_linux.yml  -i denis_inventory 
+   89  ansible-navigator run convert_linux.yml --execution-environment-image hub.lab.example.com/ee-minimal-rhel8:latest -i denis_inventory --mode stdout --pull-policy missing
+   90  podman images
+   91  podman rmi ae6ba883d042
+   92  podman images
+   93  ansible-navigator run convert_linux.yml --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest -i denis_inventory --mode stdout --pull-policy missing
+   94  ansible-playbook convert_linux.yml  -i denis_inventory 
+   95  ansible-inventory --graph -i ./denis_inventory
+   96  ansible-navigator --help | less
+   97  ansible-navigator inventory --graph -i ./denis_inventory 
+   98  ansible-navigator inventory --graph -i ./denis_inventory  --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest  --mode stdout --pull-policy missing
+   99  ansible-navigator inventory --graph -i ./denis_inventory 
+  100  ansible-navigator inventory --graph -i ./denis_inventory  --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest  --mode stdout --pull-policy missing
+  101  ansible-inventory --graph -i ./denis_inventory
+  102  ansible-navigator doc copy  --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest  --mode stdout --pull-policy missing
+  103  vim convert_linux
+  104  vim convert_linux.yml 
+  105  podman images
+  106  ansible-navigator   --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest  --mode interactive --pull-policy missing
+  107  ls
+  108  ansible-inventory --graph -i ./denis_inventory
+  109  ansible-navigator inventory --graph -i ./denis_inventory  --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest  --mode stdout --pull-policy missing
+  110  ansible-navigator inventory  -i ./denis_inventory  --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest  --mode stdout --pull-policy missing --graph
+  111  ansible-navigator inventory  -i ./denis_inventory  --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest  --mode stdout --pull-policy missing --graph cisco\
+  112  ansible-navigator inventory  -i ./denis_inventory  --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest  --mode stdout --pull-policy missing --graph cisco
+  113  ansible-navigator inventory  -i ./denis_inventory  --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest  --mode stdout --pull-policy missing --graph all
+  114  ansible-navigator inventory  -i ./denis_inventory  --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest  --mode stdout --pull-policy missing --graph ungrouped
+  115  ansible ungrouped --list-hosts --inventory ./denis_inventory 
+  116  ansible cisco,arista --list-hosts --inventory ./denis_inventory 
+  117  ansible-navigator inventory  -i ./denis_inventory  --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest  --mode stdout --pull-policy missing --graph 
+  118  ansible-navigator inventory  -i ./denis_inventory  --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest  --mode stdout --pull-policy missing --graph range
+  119  ansible-navigator inventory  -i ./denis_inventory  --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest  --mode stdout --pull-policy missing --list
+  120  ansible-navigator inventory  -i ./denis_inventory  --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest  --mode stdout --pull-policy missing --list --yaml
+  121  ansible-navigator inventory  -i ./denis_inventory  --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest  --mode stdout --pull-policy missing --host 192.168.3.8
+  122  ansible-navigator inventory  -i ./denis_inventory  --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest  --mode stdout --pull-policy missing --host 192.168.3.08
+  123  ansible-navigator inventory  -i ./denis_inventory  --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest  --mode stdout --pull-policy missing --host 192.168.3.8
+  124  ansible 192.168.3.8 --list-hosts -i denis_inventory 
+  125  ansible 192.168.3.08 --list-hosts -i denis_inventory 
+  126  ansible-navigator inventory  -i ./denis_inventory  --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest  --mode stdout --pull-policy missing --graph
+  127  ansible-navigator   --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest  --mode stdout --pull-policy missing 
+  128  ansible-navigator   --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest   --pull-policy missing 
+  129  ansible-navigator run ios_play.yml   --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest   --pull-policy missing 
+  130  ansible-navigator run ios_play.yml   --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest   --pull-policy missing -m stdout -i denis_inventory 
+  131  ansible-navigator   --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest   --pull-policy missing 
+  132  ansible-navigator run ios_play.yml   --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest   --pull-policy missing -m stdout -i denis_inventory --connection ansible.netcommon.network_cli
+  133  ansible-navigator run ios_play.yml   --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest   --pull-policy missing -m stdout -i denis_inventory --connection ansible.netcommon.network_cli -e "ansible_network_os=ios"
+  134  ansible-navigator run ios_play.yml   --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest   --pull-policy missing -m stdout -i denis_inventory --connection ansible.netcommon.network_cli -e "ansible_network_os=ios ansible_user=student"
+  135  ls ~/.ssh/
+  136  ansible-navigator inventory  -i ./denis_inventory  --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest  --mode stdout --pull-policy missing --list --yaml
+  137  clear
+  138  ansible-navigator inventory  -i ./denis_inventory  --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest  --mode stdout --pull-policy missing --list --yaml
+  139  ansible-navigator run ios_play.yml   --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest   --pull-policy missing -m stdout -i denis_inventory 
+  140  ansible-navigator inventory  -i ./denis_inventory  --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest  --mode stdout --pull-policy missing --list --yaml
+  141  ansible-navigator inventory  -i ./denis_inventory  --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest   --pull-policy missing 
+  142  history 
+  143  ssh utility
+  144  ssh iosze1
+  145  ssh iosxe1
+  146  clear
+  147  mkdir sap
+  148  cd sap
+  149  vim denis_inventory
+  150  sudo vim /etc/ansible/hosts
+  151  vim denis_inventory
+  152  ls /usr/lib/python3.9/site-packages/ansible/modules/
+  153  ansible-doc copy
+  154  vim convert_linux.yml
+  155  watch podman ps
+  156  ansible --version
+  157  python --version
+  158  ls /usr/share/ansible/plugins/modules
+  159  ls /usr/lib/python3.9/site-packages/ansible/modules/
+  160  watch podman ps
+  161  ansible-doc copy
+  162  watch podman ps
+  163  ls /usr/lib/python3.9/site-packages/ansible/modules/
+  164  ansible-doc copy
+  165  podman images
+  166  ansible-navigator --eei hub.lab.example.com/ee-minimal-rhel8:latest --pp missing
+  167  vim convert_linux.yml 
+  168  vim denis_inventory 
+  169  cd sap/
+  170  vim ios_play.yml
+  171  cd sap/
+  172  ls
+  173  vim ansible-navigator.yml
+  174  ansible-navigator --help | less
+  175  ansible-navigator settings --help | less
+  176  ansible-navigator settings --sample --help | less
+  177  ansible-navigator settings --sample 
+  178  ansible-navigator settings --sample --help
+  179  ansible-navigator settings --sample --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest
+  180  ansible-navigator settings --sample --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest > ansible-navigator.yml
+  181  rm -rf /home/student/sap/ansible-navigator.yml
+  182  ansible-navigator settings --sample --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest > ansible-navigator.yml
+  183  rm -rf /home/student/sap/ansible-navigator.yml
+  184  ansible-navigator settings --sample --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest > /tmp/youme.yml 
+  185  vim /tmp/youme.yml
+  186  rm -rf /tmp/youme.yml
+  187  ansible-navigator settings --effective --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest --pull-policy missing -m stdout -i denis_inventory > /tmp/youme.yml 
+  188  ansible-navigator settings --effective --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest --pull-policy missing -m stdout -i denis_inventory > youme.yml 
+  189  mv youme.yml ansible-navigator.yml
+  190  vim ansible-navigator.yml 
+  191  ansible-navigator settings --effective --execution-environment-image hub.lab.example.com/ee-meme-rhel8:latest --pull-policy missing -m interactive -i denis_inventory > /tmp/youme.yml 
+  192  ansible-navigator settings --effective --execution-environment-image hub.lab.example.com/ee-minimal-rhel8:latest --pull-policy missing -m interactive -i denis_inventory > /tmp/youme.yml 
+  193  mv /tmp/youme.yml /tmp/ansible-navigator.yml
+  194  vi /tmp/ansible-navigator.yml
+  195  vim ansible-navigator.yml 
+  196  cd sap/
+  197  rm -rf *.json
+  198  ls
+  199  vim ios_play.yml 
+  200  watch pordman ps
+  201  watch podman ps
+  202  ls
+  203  rm -rf ios_play-artifact-2025*
+  204  ls
+  205  cat denis_inventory 
+  206  :q
+  207  ls
+  208  rm -rf *.json
+  209  ls
+  210  vim ios_play.yml 
+  211  cp ios_play.yml handlers_demo.yml
+  212  vim handlers_demo.yml
+  213  cp handlers_demo.yml without_handlers.yml
+  214  mv handlers_demo.yml with_handlers.yml
+  215  vim without_handlers.yml
+  216  vim with_handlers.yml
+  217  cp with_handlers.yml multiple_play.yml
+  218  vim multiple_play.yml
+  219  vim with_handlers.yml
+  220  vim multiple_play.yml
+  221  cp with_handlers.yml multiple_lines.yml
+  222  vim multiple_lines.yml
+  223  cd
+  224  mkdir -p ~/git-repos
+  225  cd ~/git-repos
+  226  ls
+  227  git clone git@git.lab.example.com:student/snmp.git
+  228  ls
+  229  rm -rf *
+  230  ls
+  231  cd snmp/
+  232  ls
+  233  git status 
+  234  vim inventory 
+  235  touch abc.yml
+  236  git status 
+  237  git add inventory 
+  238  git add abc.yml 
+  239  git status 
+  240  git branch
+  241  git branch dev
+  242  git branch
+  243  git checkout dev 
+  244  git branch
+  245  git checkout -b test
+  246  git branch
+  247  git add .
+  248  git commit -m "Test Branch"
+  249  git push
+  250      git push --set-upstream origin test
+  251  git branch
+  252  git log
+  253  git pull
+  254  git show af2cd4bf5bd20cf516a731a28d0d4f8cdbff41bb
+  255  cd
+  256  cd sap/
+  257  vim denis_inventory 
+  258  vim test_controller_inventory.yml
+  259  cd ..
+  260  rsync -av sap awx@controller:/var/lib/awx/projects/
+  261  ls .ssh/
+  262  vim .ssh/gitlab_rsa
+  263  cd sap/
+  264  vim without_handlers.yml 
+  265  vim with_handlers.yml 
+  266  vim convert_linux.yml 
+  267  vim ansible-navigator.yml 
+  268  vim denis_inventory 
+  269  cd sap/
+  270  ansible-navigator run ios_play.yml
+  271  ansible-navigator settings --sample --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest > /tmp/youme.yml
+  272  vim /tmp/youme.yml
+  273  ansible-navigator settings --sample --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest > /tmp/youme.yml
+  274  vi /tmp/youme.yml
+  275  rm /tmp/youme.yml
+  276  ansible-navigator settings --sample --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest > /tmp/youme.yml
+  277  ansible-navigator settings --sample --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest --help
+  278  ansible-navigator settings --sample --yaml --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest --help
+  279  ansible-navigator settings --sample  --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest --help
+  280  ansible-navigator settings --sample --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest 
+  281  ansible-navigator settings --sample 
+  282  ansible-navigator settings --effective --sample 
+  283  ansible-navigator run ios_play.yml   
+  284  export ANSIBLE_NAVIGATOR_CONFIG=/tmp/ansible-navigator.yml
+  285  ansible-navigator run ios_play.yml   
+  286  unset ANSIBLE_NAVIGATOR_CONFIG
+  287  ansible-navigator run ios_play.yml   
+  288  cat ansible-navigator.yml 
+  289  ansible-navigator run ios_play.yml   
+  290  ansible-navigator run convert_linux.yml 
+  291  ansible-navigator run convert_linux.yml   --execution-environment-image hub.lab.example.com/ee-minimal-rhel8:latest    -m interactive 
+  292  ansible-navigator run convert_linux.yml   
+  293  ansible-navigator run convert_linux.yml   --help | grep pae
+  294  ansible-navigator run convert_linux.yml   
+  295  less convert_linux-artifact-2025-10-14T07\:38\:21.492971+00\:00.json 
+  296  ansible-navigator --help | less   
+  297  ansible-navigator replay convert_linux-artifact-2025-10-14T07:38:21.492971+00:00.json
+  298  ansible-navigator replay convert_linux-artifact-2025-10-14T07:38:09.757777+00:00.json
+  299  ansible-navigator -m interactive
+  300  ansible-navigator replay convert_linux-artifact-2025-10-14T07:38:09.757777+00:00.json --pae false
+  301  ansible-navigator run convert_linux.yml --pae false
+  302  ansible-navigator run convert_linux.yml --pae true --step
+  303  ansible-navigator run convert_linux.yml --pae false --step
+  304  ansible-navigator doc ios_banner
+  305  ansible-navigator run ios_play.yml --syntax-check
+  306  ansible-navigator run ios_play.yml --syntax-check;
+  307  ansible-navigator run ios_play.yml --syntax-check
+  308  ansible-navigator run ios_play.yml --list-tasks
+  309  ansible-navigator run ios_play.yml --syntax-check
+  310  ansible-navigator lint ios_play.yml 
+  311  ansible-navigator run ios_play.yml --syntax-check
+  312  ansible-navigator lint ios_play.yml 
+  313  ansible-navigator run ios_play.yml --syntax-check
+  314  ansible-navigator lint ios_play.yml 
+  315  ansible-navigator run ios_play.yml --list-tasks
+  316  ansible-navigator lint ios_play.yml 
+  317  ansible-navigator lint ios_play.yml  -m interactive
+  318  ansible-navigator run ios_play.yml --list-tasks
+  319  ansible-navigator run ios_play.yml --list-hosts
+  320  vim denis_inventory 
+  321  ansible-navigator run ios_play.yml --dry-run
+  322  ansible-navigator run ios_play.yml -C
+  323  ansible-navigator run ios_play.yml -C --limit=iosxe1.lab.example.com
+  324  ansible-navigator run ios_play.yml  --limit=iosxe1.lab.example.com --step 
+  325  ansible-navigator run ios_play.yml  --limit=iosxe1.lab.example.com --step -vv
+  326  ansible-navigator run ios_play.yml  --limit=iosxe1.lab.example.com --step 
+  327  history 
+  328  ansible-navigator run handlers_demo.yml 
+  329  ansible-navigator run handlers_demo.yml -v
+  330  ansible-navigator run handlers_demo.yml --step
+  331  ansible-navigator run without_handlers.yml 
+  332  ansible-navigator run without_handlers.yml --syntax-check
+  333  ansible-navigator lint without_handlers.yml 
+  334  ansible-navigator run without_handlers.yml 
+  335  ansible-navigator lint without_handlers.yml 
+  336  vim with_handlers.yml 
+  337  ansible-navigator lint with_handlers.yml 
+  338  ansible-navigator lint without_handlers.yml 
+  339  ansible-navigator run with_handlers.yml 
+  340  ansible-navigator lint without_handlers.yml 
+  341  ansible-navigator lint with_handlers.yml 
+  342  ansible-navigator run with_handlers.yml --step
+  343  ansible-navigator -m interactive
+  344  ansible-navigator run with_handlers.yml 
+  345  ansible-navigator run with_handlers.yml --list-tasks
+  346  ansible-navigator run multiple_play.yml --list-tasks
+  347  ansible-navigator run multiple_play.yml --list-hos
+  348  ansible-navigator run multiple_play.yml --list-hosts
+  349  ansible-navigator run multiple_play.yml --list-hos
+  350  ansible-navigator run multiple_play.yml --list-tasks
+  351  ansible-navigator run multiple_play.yml --list-hosts
+  352  ansible-navigator run multiple_play.yml --list-tasks
+  353  ansible-navigator run multiple_play.yml --check
+  354  ansible-navigator run multiple_play.yml --list-tasks
+  355  ansible-navigator run multiple_play.yml --start-at-task="Change Description on GE2" --step
+  356  ansible-navigator run multiple_play.yml --list-tasks
+  357  ansible-navigator run multiple_play.yml --start-at-task="Enable the netconf service on port 830"
+  358  vim denis_inventory 
+  359  ansible-navigator run multiple_play.yml --start-at-task="Enable the netconf service on port 830"
+  360  ansible-navigator doc -l
+  361  ansible-navigator doc junipernetworks.junos.junos_rpc
+  362  ansible-navigator -s doc junipernetworks.junos.junos_rpc
+  363  ansible-navigator run multiple_lines.yml --step
+  364  vi convert_linux.yml 
+  365  lab start run-git
+  366  ansible-navigator inventory --graph
+  367  ansible-navigator run without_handlers.yml 
+  368  ansible-navigator run without_handlers.yml -vvv
+  369  ansible-navigator lint with_handlers.yml 
+  370  ls
+  371  ansible-navigator replay convert_linux-artifact-2025-10-14T07:38:09.757777+00:00.json
+  372  ansible-navigator -m interactive
+  373  ansible-navigator run ios_play.yml 
+  374  q
+  375  ssh root@utility
+  376  ssh iosxe1
+  377  cd sap/
+  378  vim ansible-navigator.yml 
+  379  ansible-navigator  --sample --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest > /tmp/youme.yml 
+  380  ansible-navigator  --sample --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest -m stdout > /tmp/youme.yml 
+  381  ansible-navigator settings  --sample --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest -m stdout > /tmp/youme.yml 
+  382  vim /tmp/youme.yml
+  383  ansible-navigator settings  --sample --execution-environment-image hub.lab.example.com/ee-supported-rhel8:latest -m stdout > /tmp/youme.yml 
+  384  vim /tmp/youme.yml
+  385  vim ansible-navigator.yml 
+  386  vim denis_inventory 
+  387  cp denis_inventory ~/git-repos/snmp/
+  388  cd ~/git-repos/snmp/
+  389  ll
+  390  git status 
+  391  git add denis_inventory 
+  392  git branch
+  393  git commit -m "Added Inventory"
+  394  git push
+  395  cd sap/
+  396  vim convert_linux.yml 
+  397  cd
+  398  ssh awx@controller
+  399  cd sap/
+  400  ls
+  401  rm -rf *.json
+  402  ls
+  403  cp with_handlers.yml variables_demo.yml
+  404  vim variables_demo.yml
+  405  vim facts_demo.yml
+  406  cp facts_demo.yml facts_complex_demo.yml
+  407  mv facts_complex_demo.yml facts_all_demo.yml
+  408  vim facts_all_demo.yml
+  409  vim ios_play.yml 
+  410  cp variables_demo.yml survey_var.yml
+  411  vim survey_var.yml
+  412  cd ..
+  413  rsync -av sap/ awx@controller:/var/lib/awx/projects/sap/
+  414  cd sap/
+  415  vim survey_var.yml
+  416  cd ..
+  417  rsync -av sap/ awx@controller:/var/lib/awx/projects/sap/
+  418  cd sap/
+  419  vim facts_demo.yml 
+  420  cp facts_demo.yml filters_demo.yml
+  421  vim filters_demo.yml
+  422  vim facts_demo.yml 
+  423  vim loops_demo.yml
+  424  cp multiple_play.yml condition_demo.yml
+  425  vim condition_demo.yml
+  426  cp condition_demo.yml complex_condition_demo.yml
+  427  vim condition_demo.yml
+  428  vim complex_condition_demo.yml 
+  429  cd sap/
+  430  ansible-navigator inventory --graph
+  431  ansible-navigator inventory --list --yaml
+  432  reset
+  433  ansible-navigator inventory --list --yaml
+  434  tree
+  435  mkdir sap_inventory
+  436  mv denis_inventory sap_inventory/
+  437  tree 
+  438  touch sap_inventory/{vmware,ldap}.py
+  439  ll sap_inventory/
+  440  chmod a+x sap_inventory/{vmware,ldap}.py
+  441  ll sap_inventory/
+  442  vim ansible-navigator.yml 
+  443  mkdir sap_inventory/group_vars
+  444  tree
+  445  vim sap_inventory/group_vars/all.yml
+  446  tree
+  447  vim sap_inventory/group_vars/all.yml
+  448  tree
+  449  mkdir group_vars
+  450  tree
+  451  vim group_vars/all.yml
+  452  tree
+  453  vim sap_inventory/group_vars/cisco.yml 
+  454  tree
+  455  vim sap_inventory/group_vars/cisco.yml 
+  456  vim group_vars/arista.yml
+  457  vim group_vars/juniper.yml
+  458  tree
+  459  mv group_vars/arista.yml group_vars/juniper.yml sap_inventory/group_vars/
+  460  tree
+  461  vim sap_inventory/group_vars/cisco.yml 
+  462  vim sap_inventory/group_vars/arista.yml 
+  463  tree
+  464  cp sap_inventory/group_vars/cisco.yml group_vars/
+  465  vim group_vars/cisco.yml 
+  466  tree
+  467  mkdir sap_inventory/host_vars
+  468  tree
+  469  vim sap_inventory/host_vars/iosxe2.lab.example.com.yml
+  470  tree
+  471  cp -r sap_inventory/host_vars/ .
+  472  tree
+  473  vim host_vars/iosxe2.lab.example.com.yml 
+  474  tree
+  475  vim ansible-navigator.yml 
+  476  tree
+  477  cat sap_inventory/group_vars/all.yml 
+  478  tree
+  479  mv sap_inventory/group_vars/all.yml EARLIER_ALL_yml.yml
+  480  tree
+  481  mv EARLIER_ALL_yml.yml EARLIER_all_yml.yml 
+  482  tree
+  483  ls
+  484  cat ansible-navigator.yml
+  485  vim facts_demo.yml 
+  486  cd sap/
+  487  cd sap/
+  488  ansible-navigator run variables_demo.yml 
+  489  ansible-navigator doc debug
+  490  ansible-navigator run variables_demo.yml 
+  491  ansible-navigator inventory -m interactive
+  492  ansible-navigator run variables_demo.yml \
+  493  ansible-navigator run variables_demo.yml 
+  494  vim convert_linux.yml 
+  495  ansible-navigator run variables_demo.yml --syntax-check 
+  496  ansible-navigator lint variables_demo.yml 
+  497  ansible-navigator run variables_demo.yml 
+  498  ansible-navigator inventory --list --yaml
+  499  ansible-navigator run variables_demo.yml 
+  500  ansible-navigator inventory --list --yaml
+  501  ansible-navigator inventory --list --yaml cisco
+  502  ansible-navigator inventory cisco --list --yaml 
+  503  ansible-navigator inventory --graph
+  504  ansible-navigator inventory --graph cisco
+  505  ansible-navigator inventory --list --yaml cisco
+  506  ansible-navigator run variables_demo.yml 
+  507  ansible-navigator inventory --list --yaml 
+  508  ansible-navigator run variables_demo.yml 
+  509  ansible-navigator inventory --list --yaml 
+  510  ansible-navigator run variables_demo.yml 
+  511  tree
+  512  ansible-navigator run variables_demo.yml --pae true
+  513  ansible-navigator run variables_demo.yml --pae false
+  514  ansible-navigator run variables_demo.yml 
+  515  ansible-navigator lint variables_demo.yml 
+  516  ansible-navigator run variables_demo.yml 
+  517  vim outside_vars.yml
+  518  ansible-navigator run variables_demo.yml 
+  519  tree
+  520  mkdir vars
+  521  mv outside_vars.yml vars/
+  522  tree
+  523  mv outside_vars.yml vars/
+  524  ansible-navigator run variables_demo.yml 
+  525  vim ./vars/outside_vars.yml
+  526  ansible-navigator run variables_demo.yml 
+  527  ansible-navigator run variables_demo.yml --limit=iosxe*
+  528  ansible-navigator run variables_demo.yml --limit=iosxe2*
+  529  vim without_handlers.yml 
+  530  ansible-navigator run variables_demo.yml --limit=iosxe2*
+  531  vim  vars/outside_vars.yml 
+  532  ansible-navigator run variables_demo.yml --limit=iosxe2*
+  533  cat sap_inventory/group_vars/all.yml 
+  534  cay sap_inventory/group_vars/all.yml 
+  535  cat sap_inventory/group_vars/all.yml 
+  536  mkdir sap_inventory/group_vars/all
+  537  vim sap_inventory/group_vars/all/creds.yml
+  538  vim sap_inventory/group_vars/all/db.yml
+  539  vim sap_inventory/group_vars/all/custom.yml
+  540  ansible-navigator inventory --list --yaml 
+  541  ansible-navigator run variables_demo.yml --limit=iosxe2*
+  542  ansible-navigator run variables_demo.yml --limit=iosxe* --step
+  543  ansible-navigator run variables_demo.yml 
+  544  ansible-navigator run variables_demo.yml --help | grep extra
+  545  ansible-playbook --help | grep extra
+  546  ansible-navigator run variables_demo.yml --extra-vars 'somevar="Level 22 GOD LEVEL GLOBAL SCOPE"'
+  547  ansible-navigator run facts_demo.yml 
+  548  ansible-navigator run facts_demo.yml -vv
+  549  ansible-navigator run facts_demo.yml -vvv
+  550  ansible-navigator run facts_demo.yml 
+  551  rm -rf collections/
+  552  mkdir collections
+  553  tree
+  554  ansible-galaxy collection install cisco.ios -p collections/
+  555  ansible-galaxy collection install ansible.netcommon:4.5.0 -p collections/
+  556  ansible-galaxy collection install ansible.netcommon:4.1.0 -p collections/
+  557  ls collections/
+  558  ls collections/ansible_collections/
+  559  ls collections/ansible_collections/ansible
+  560  ls collections/ansible_collections/ansible/netcommon/
+  561  ls collections/ansible_collections/ansible/netcommon/plugins/
+  562  ls collections/ansible_collections/ansible/netcommon/plugins/connection/
+  563  ls collections/ansible_collections/cisco/ios/
+  564  ls collections/ansible_collections/cisco/ios/plugins/modules/
+  565  vim ansible.cfg 
+  566  ansible-doc -l
+  567  ansible iosxe1* -m ios_facts
+  568  vim ansible.cfg 
+  569  ssh iosxe1
+  570  vim ansible.cfg 
+  571  ansible iosxe1* -m ios_facts
+  572  vim /etc/ansible/ansible.cfg 
+  573  su -
+  574  vim /etc/ansible/ansible.cfg 
+  575  vim ansible.cfg 
+  576  ansible iosxe1* -m ios_facts
+  577  vim ansible.cfg 
+  578  ansible iosxe1* -m ios_facts
+  579  ansible iosxe1* -m ios_facts -c ansible.netcommon.network_cli
+  580  ansible iosxe1* -m ios_facts -c ansible.netcommon.network_cli -e 'ansible_user=student ansible_password=student'
+  581  history 
+  582  vim ansible.cfg 
+  583  cat ansible.cfg
+  584  ansible iosxe1* -m ios_facts -c ansible.netcommon.network_cli -e 'ansible_user=student ansible_password=student'
+  585  ansible-navigator run facts_demo.yml 
+  586  mkdir info
+  587  ansible-navigator run facts_demo.yml 
+  588  cat info/iosxe1.lab.example.com.txt 
+  589  vim ios_play.yml 
+  590  ansible-navigator run facts_demo.yml 
+  591  ansible iosxe1* -m ios_facts -c ansible.netcommon.network_cli -e 'ansible_user=student ansible_password=student'
+  592  ansible-doc ios_facts
+  593  ansible iosxe1* -m ios_facts -a 'gather_subset=all' -c ansible.netcommon.network_cli -e 'ansible_user=student ansible_password=student'
+  594  ansible iosxe1* -m ios_facts -c ansible.netcommon.network_cli -e 'ansible_user=student ansible_password=student'
+  595  ansible-navigator run facts_demo.yml 
+  596  cat info/iosxe1.lab.example.com.txt 
+  597  ansible-navigator run facts_demo.yml 
+  598  cat info/iosxe1.lab.example.com.txt 
+  599  ansible arista1* -m eos_facts -c ansible.netcommon.network_cli -e 'ansible_user=student ansible_password=student' 
+  600  cat group_vars/cisco.yml 
+  601  cat sap_inventory/group_vars/cisco.yml 
+  602  cat sap_inventory/group_vars/arista.yml 
+  603  ansible arista1* -m arista.eos.eos_facts -c ansible.netcommon.network_cli -e 'ansible_user=student ansible_password=student' 
+  604  ansible-navigator run facts_demo.yml --step
+  605  ansible-navigator run facts_all_demo.yml --step
+  606  clear
+  607  ansible-navigator run facts_all_demo.yml --step
+  608  clear
+  609  ansible-navigator run facts_all_demo.yml --step
+  610  ansible-navigator run facts_all_demo.yml 
+  611  ll
+  612  ansible-navigator run facts_all_demo.yml 
+  613  cat ./info/iosxe1.lab.example.com.txt 
+  614  ls
+  615  mkdir me
+  616  ansible-navigator run facts_all_demo.yml 
+  617  ansible-navigator run survey_var.yml 
+  618  cat /etc/group
+  619  cat /etc/group | grep student
+  620  cat /etc/group | grep student | wc -l
+  621  ansible-navigator run facts_demo.yml 
+  622  cat info/iosxe1.lab.example.com.txt 
+  623  ansible-navigator run facts_demo.yml 
+  624  cat info/iosxe1.lab.example.com.txt 
+  625  ip a
+  626  ansible-navigator run filters_demo.yml 
+  627  ll /usr/lib/python3.9/site-packages/ansible/plugins/filter/
+  628  ll /usr/lib/python3.9/site-packages/ansible/plugins/
+  629  ls /usr/lib/python3.9/site-packages/ansible/plugins/filter/
+  630  vim filters_demo.yml 
+  631  vim vars/outside_vars.yml 
+  632  cat sap_inventory/group_vars/cisco.yml 
+  633  cat sap_inventory/group_vars/juniper.yml 
+  634  ansible-navigator run condition_demo.yml 
+  635  cat info/iosxe1.lab.example.com.txt 
+  636  ansible-navigator run condition_demo.yml --step
+  637  ansible-navigator run complex_condition_demo.yml --step
+  638  ansible-navigator run complex_condition_demo.yml 
+  639  cd sap/
+  640  mkdir roles
+  641  ls roles
+  642  ansible-galaxy --help
+  643  ansible-galaxy role --help
+  644  ansible-galaxy role init basic --init-path ./roles/
+  645  tree roles/
+  646  rm -rf roles/
+  647  ls
+  648  vim denis_inventory 
+  649  ansible-navigator inventory --graph
+  650  vim sap_inventory/denis_inventory 
+  651  ansible-navigator run facts_demo.yml -vv
+  652  ansible-navigator run facts_demo.yml -vvv
+  653  ansible-navigator run facts_demo.yml -vvvv
+  654  mkdir collections
+  655  ansible-galaxy collection install ansible.netcommon -p collections/
+  656  tree collections/
+  657  ansible-navigator collection -m interactive
+  658  ansible-navigator collections -m interactive
+  659  ansible-galaxy collection install ansible.netcommon:4.1.0 -p collections/
+  660  ansible-galaxy collection install cisco.ios -p collections/
+  661  ansible iosxe1* -m ios_facts
+  662  ansible iosxe1* -m ios_facts -i sap_inventory/
+  663  tree collections/
+  664  podman images
+  665  podman run --rm -it ae6ba883d042 bash
+  666  ansible-navigator run loops_demo.yml 
+  667  mv collections/ ../
+  668  ansible-navigator run loops_demo.yml 
+  669  clear
+  670  ansible-navigator run loops_demo.yml 
+  671  ansible-navigator run loops_demo.yml --start-at-task="Print NIC Dictonary"
+  672  ansible-navigator run loops_demo.yml --start-at-task="Ping hosts"
+  673  cta info/iosxe1.lab.example.com.txt 
+  674  cat info/iosxe1.lab.example.com.txt 
+  675  vim sap_inventory/denis_inventory 
+  676  vim vars/outside_vars.yml 
+  677  cd sap/
+  678  ansible workstation* -m ansible.builtin.setup | less
+  679  vim ansible.cfg
+  680  ansible workstation* -m ansible.builtin.setup | less
+  681  ansible workstation* -m cisco.ios.ios_facts
+  682  ansible iosxe1* -m cisco.ios.ios_facts
+  683  ssh awx@controller
+  684  cd sap/
+  685  ls
+  686  vim with_handlers.yml 
+  687  cp with_handlers.yml ignore_errors.yml
+  688  mv ignore_errors.yml ignore_errors_demo.yml
+  689  vim ignore_errors_demo.yml
+  690  cp ignore_errors_demo.yml failed_when_fail_assert.yml
+  691  vim failed_when_fail_assert.yml
+  692  cp with_handlers.yml changed_when_demo.yml
+  693  vim changed_when_demo.yml
+  694  cp changed_when_demo.yml force_handlers_demo.yml
+  695  vim force_handlers_demo.yml
+  696  cp multiple_play.yml block_demo.yml
+  697  vim block_demo.yml
+  698  vim success.yml
+  699  vim always.yml
+  700  vim failure.yml
+  701  cat success.yml 
+  702  cat always.yml 
+  703  cat fail
+  704  cat failure.yml 
+  705  cd ..
+  706  rsync -av sap/ awx@controller:/var/lib/awx/projects/sap/
+  707  cd sap/
+  708  vim multiple_play.yml 
+  709  vim facts_demo.yml 
+  710  vim multiple_play.yml 
+  711  vim integration_playbook.yml
+  712  ansible-navigator run config_tasks.yml --syntax-check
+  713  vim integration_playbook.yml
+  714  ansible-navigator doc ansible.builtin.file
+  715  vim integration_playbook.yml
+  716  vim multiple_play.yml 
+  717  vim with_handlers.yml 
+  718  vim variables_demo.yml 
+  719  vim use_roles.yml
+  720  cd sap/
+  721  cat info/iosxe1.lab.example.com.txt 
+  722  vim tasks/config_tasks.yml 
+  723  vim with_handlers.yml 
+  724  vim tasks/config_tasks.yml 
+  725  vim tasks/info_tasks.yml 
+  726  ls
+  727  vim multiple_lines.yml
+  728  cd sap/roles/config_role/
+  729  tree
+  730  vim defaults/main.yml 
+  731  vim vars/main.yml 
+  732  cd ../info_role/
+  733  vim handlers/main.yml 
+  734  vim defaults/main.yml 
+  735  vim handlers/main.yml 
+  736  cd ../test_role/
+  737  vim handlers/main.yml 
+  738  pwd
+  739  tree
+  740  mkdir vars
+  741  vim vars/main.yml
+  742  d sap/
+  743  cd sap/
+  744  ansible-navigator doc ios_ping
+  745  ansible-navigator run ignore_errors_demo.yml 
+  746  clear
+  747  ansible-navigator run ignore_errors_demo.yml 
+  748  ansible-navigator run failed_when_fail_assert.yml 
+  749  vim condition_demo.yml 
+  750  vim facts_demo.yml 
+  751  vim ignore_errors_demo.yml 
+  752  ping arista1
+  753  ansible-navigator run failed_when_fail_assert.yml 
+  754  ansible-navigator run failed_when_fail_assert.yml --step
+  755  clear
+  756  ansible-navigator run failed_when_fail_assert.yml --step
+  757  clear
+  758  ansible-navigator run failed_when_fail_assert.yml --step
+  759  ansible-navigator doc ansible.builtin.assert
+  760  ansible-navigator run failed_when_fail_assert.yml --step
+  761  LABEL ok -> fatalclear
+  762  clear
+  763  ansible-navigator run changed_when_demo.yml
+  764  ansible-navigator run changed_when_demo.yml --step
+  765  vim ignore_errors_demo.yml 
+  766  vim failed_when_fail_assert.yml 
+  767  ansible-navigator run force_handlers_demo.yml 
+  768  ansible-navigator run block_demo.yml --step
+  769  ansible-navigator run block_demo.yml --list-hosts
+  770  ansible-navigator run block_demo.yml --step
+  771  vim condition_demo.yml 
+  772  ansible-navigator run block_demo.yml --step
+  773  vim ignore_errors_demo.yml 
+  774  ansible-navigator doc ios_user
+  775  ansible-navigator run block_demo.yml --step
+  776  pign arista1
+  777  ping arista1
+  778  ansible-navigator run block_demo.yml --step --limit=iosxe1
+  779  ansible-navigator run block_demo.yml --step --limit=iosxe1*
+  780  vim config_tasks.yml
+  781  vim display_tasks.yml
+  782  vim info_tasks.yml
+  783  vim display_tasks.yml
+  784  vim config_tasks.yml
+  785  vim integration_playbook.yml 
+  786  vim info_tasks.yml 
+  787  vim integration_playbook.yml 
+  788  vim config_tasks.yml
+  789  ansible-navigator doc import_tasks
+  790  ansible-navigator run integration_playbook.yml --list-tasks
+  791  ansible-navigator run integration_playbook.yml --check
+  792  vim config_tasks.yml
+  793  rm -rf info/
+  794  ansible-navigator run integration_playbook.yml --check
+  795  ls
+  796  mkdir tasks
+  797  mv config_tasks.yml info_tasks.yml tasks/
+  798  tree
+  799  ansible-navigator run integration_playbook.yml --check
+  800  ansible-navigator run integration_playbook.yml --list-tasks
+  801  ansible-navigator run integration_playbook.yml --check --start-at-task="Configure the motd banner"
+  802  ansible-navigator run integration_playbook.yml --list-tasks
+  803  # ansible-navigator run integration_playbook.yml --check --start-at-task="Create Folder to Store System Info"
+  804  ansible-navigator run integration_playbook.yml --list-tasks
+  805  ansible-navigator run integration_playbook.yml --check --start-at-task="Create Folder to Store System Info"
+  806  ansible-navigator run integration_playbook.yml --check
+  807  clear
+  808  ansible-navigator run integration_playbook.yml --list-tasks
+  809  ansible-navigator run integration_playbook.yml 
+  810  vim tasks/config_tasks.yml 
+  811  vim tasks/info_tasks.yml 
+  812  ansible-navigator run integration_playbook.yml --syntax-check
+  813  vim tasks/config_tasks.yml 
+  814  ansible-navigator run integration_playbook.yml --syntax-check
+  815  ansible-navigator run integration_playbook.yml --list-tasks
+  816  ansible-navigator run integration_playbook.yml --check
+  817  vim tasks/info_tasks.yml 
+  818  ansible-navigator run integration_playbook.yml 
+  819  ansible-navigator run integration_playbook.yml --check
+  820  vim multiple_lines.yml 
+  821  vim multiple_play.yml 
+  822  ansible-navigator doc import_playbook
+  823  ansible-navigator run integration_playbook.yml --list-tasks
+  824  vim variables_demo.yml 
+  825  ls
+  826  mkdir roles
+  827  ansible-galaxy --help
+  828  ansible-galaxy role --help
+  829  ansible-galaxy role install --help
+  830  ansible-galaxy role install navdeepsachdeva.windows_iis --roles-path ./roles/
+  831  tree roles/navdeepsachdeva.windows_iis/
+  832  cat roles/navdeepsachdeva.windows_iis/tasks/main.yml 
+  833  cat roles/navdeepsachdeva.windows_iis/handlers/main.yml 
+  834  cat roles/navdeepsachdeva.windows_iis/defaults/main.yml 
+  835  cat roles/navdeepsachdeva.windows_iis/vars/main.yml 
+  836  tree roles/navdeepsachdeva.windows_iis/
+  837  rm -rf roles/navdeepsachdeva.windows_iis/tests/
+  838  tree roles/navdeepsachdeva.windows_iis/
+  839  ansible-navigator run use_roles.yml --list-tasks
+  840  rm -rf roles/navdeepsachdeva.windows_iis/
+  841  ansible-galaxy role init config_role --roles-path ./roles/
+  842  ansible-galaxy role init config_role --init-path ./roles/
+  843  tree roles/
+  844  rm -rf roles/config_role/files/
+  845  rm -rf roles/config_role/tests/
+  846  tree roles/
+  847  ansible-navigator run use_roles.yml  --syntax-check
+  848  ansible-navigator run use_roles.yml --list-tasks  
+  849  ansible-navigator run use_roles.yml --check
+  850  ansible-navigator run use_roles.yml --check -v
+  851  ansible-galaxy role init info_role --init-path ./roles/
+  852  ansible-navigator run use_roles.yml --list-tasks  
+  853  vim /home/student/sap/roles/info_role/tasks/main.yml
+  854  ansible-navigator run use_roles.yml --list-tasks  
+  855  ansible-navigator run use_roles.yml --check -v
+  856  cleaqr
+  857  clear
+  858  ansible-navigator run use_roles.yml --list-tasks  
+  859  ansible-navigator run use_roles.yml --check 
+  860  clear
+  861  ansible-navigator run use_roles.yml --list-tasks  
+  862  ansible-navigator run use_roles.yml --check 
+  863  ansible-galaxy role init test_role --init-path ./roles/
+  864  vim integration_playbook.yml 
+  865  ansible-navigator run use_roles.yml --list-tasks  
+  866  ansible-navigator doc ansible.builtin.import_role
+  867  ansible-navigator run use_roles.yml --list-tasks  
+  868  ansible-navigator run use_roles.yml --check
+  869  pwd
+  870  ansible-navigator run use_roles.yml --list-tasks  
+  871  ansible-navigator run use_roles.yml --check
+  872  ansible-navigator run use_roles.yml --list-tasks  
+  873  cd sap/roles/config_role/
+  874  tree
+  875  vim tasks/main.yml 
+  876  vim handlers/main.yml 
+  877  vim tasks/main.yml 
+  878  vim handlers/main.yml 
+  879  vim tasks/main.yml 
+  880  tree
+  881  cd ..
+  882  ls
+  883  cd info_role/
+  884  tree
+  885  rm -rf files templates tests
+  886  tree
+  887  vim tasks/main.yml 
+  888  cd ..
+  889  ls
+  890  cd config_role/
+  891  tree
+  892  vim meta/main.yml 
+  893  cat defaults/main.yml 
+  894  vim README.md 
+  895  tree
+  896  cat meta/main.yml 
+  897  cd ../
+  898  vim info_role/tasks/main.yml 
+  899  vim info_role/handlers/main.yml 
+  900  cd test_role/
+  901  tree
+  902  rm -rf files templates tests
+  903  tree
+  904  rm -rf vars
+  905  tree
+  906  vim tasks/main.yml 
+  907  cd sap
+  908  ssh iosxe1
+  909  cd sap/
+  910  vim use_roles.yml 
+  911  cd sap/
+  912  ansible-navigator run use_roles.yml --check
+  913  cat roles/config_role/tasks/main.yml 
+  914  ansible-galaxy role init some_role --init-path ./roles/
+  915  cd sap
+  916  cd roles/test_role/
+  917  vim tasks/main.yml 
+  918  vim handlers/main.yml 
+  919  cd ../../
+  920  ansible-navigator run use_roles.yml --list-tasks
+  921  ls roles/
+  922  ansible-navigator run use_roles.yml --list-tasks
+  923  vim failed_when_fail_assert.yml 
+  924  ansible-navigator run use_roles.yml --list-tasks
+  925  ls roles/
+  926  vim ansible.cfg 
+  927  cat ansible.cfg
+  928  ls roles/
+  929  vim ansible.cfg 
+  930  ansible-navigator run external_role_demo.yml --list-tasks
+  931  vim external_roles/maxrainer.cisco_iosupgrade/tasks/main.yml 
+  932  rm -rf external_roles/*
+  933  vim external_roles/requirements.yml
+  934  cat external_roles/requirements.yml
+  935  ansible-galaxy role  install --help | less
+  936  ansible-navigator -m interactive
+  937  ls
+  938  mkdir collections
+  939  ls collections
+  940  ls collections/ansible_collections/
+  941  ls collections/ansible_collections/cisco
+  942  ls collections/ansible_collections/cisco/
+  943  ls collections/ansible_collections/
+  944  ls collections/ansible_collections/community
+  945  ls collections/ansible_collections/ansible
+  946  vim ansible.cfg 
+  947  ls collections/ansible_collections/cisco
+  948  ls collections/ansible_collections/cisco/catalystwan/
+  949  ls collections/ansible_collections/cisco/catalystwan/plugins/
+  950  ansible-navigator -m interactive
+  951  ansible-navigator run external_role_demo.yml --list-tasks
+  952  cat external_roles/requirements.yml 
+  953  cat collections/requirements.yml 
+  954  vim collections/requirements.yml 
+  955  ls collections/
+  956  watch ls collections/
+  957  watch ls collections/ansible_collections/
+  958  cat external_roles/requirements.yml
+  959  cat collections/requirements.yml 
+  960  ansible-galaxy collection install network.vpn --collections-path ./collections/
+  961  vim collections/requirements.yml 
+  962  ansible-galaxy collection install -r collections/requirements.yml --collections-path ./collections/
+  963  ansible-galaxy collection list
+  964  cat collections/requirements.yml 
+  965  ls
+  966  history > history.txt

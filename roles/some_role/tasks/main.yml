@@ -1,0 +1,46 @@
+---
+# tasks file for some_role
+    - name: Configure the motd banner Ugly
+      cisco.ios.ios_banner:
+        banner: motd
+        text: There are 6 people in class and styding Ansible DO 457 and from Different COuntries and they are Denis, Pavol, Marius, Raul, Sumarto, Michal
+        state: present
+      changed_when: some_some is not defined
+      notify:
+        - Handler MOTD 1
+       
+    - name: Configure the motd banner RESET
+      cisco.ios.ios_banner:
+        banner: motd
+        text: RESET ME
+        state: present
+      changed_when: some_some is not defined
+      notify:
+        - Handler MOTD 2
+       
+    - name: Configure the motd banner Readable
+      cisco.ios.ios_banner:
+        banner: motd
+        text: >
+          There are 6 people in class
+          and styding Ansible DO 457 and
+          from Different COuntries and
+          they are Denis, Pavol, Marius, Raul, Sumarto, Michal
+        state: present
+      changed_when: some_some is not defined
+      notify:
+        - Handler MOTD 3
+       
+    - name: Configure the motd banner KEEP Format
+      cisco.ios.ios_banner:
+        banner: motd
+        text: |
+          There are 6 people in class
+          and styding Ansible DO 457 and
+          from Different COuntries and
+          they are Denis, Pavol, Marius, Raul, Sumarto, Michal
+        state: present
+      changed_when: some_some is not defined
+      notify:
+        - Handler MOTD 4
+

@@ -1,0 +1,20 @@
+- name: Cisco Play
+  # hosts: iosxe1*,iosxe2*
+  hosts:
+    - iosxe1*
+    - iosxe2*
+  gather_facts: false
+  tasks:
+    - name: Change Description
+      cisco.ios.ios_interfaces:
+        config:
+          - name: GigabitEthernet1
+            description: "Hello_GE11"
+
+    - name: Configure the login banner
+      cisco.ios.ios_banner:
+        banner: login
+        text: "Any Damn Thing"
+        state: present
+
+    # List means '-'

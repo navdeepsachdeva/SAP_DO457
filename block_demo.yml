@@ -1,0 +1,74 @@
+- name: Block Demo
+  hosts: iosxe1*,junos1*
+  gather_facts: false
+  tasks:
+    - name: Tasks for Cisco
+      block:
+        - name: Change Description on GE1
+          cisco.ios.ios_interfaces:
+            config:
+              - name: GigabitEthernet1
+                description: "Hello_GE_WONDERFUL"
+
+        - name: Configure the login banner
+          cisco.ios.ios_banner:
+            banner: login
+            text: "Any Damn Thing Wonderful"
+            state: present
+
+        - name: Test reachability to 198.51.100.251
+          cisco.ios.ios_ping:
+            dest: 172.25.250.24
+            # dest: 198.51.100.251
+
+        - name: Create IOS User
+          cisco.ios.ios_user:
+            name: raul
+            configured_password: "pass@123"
+            update_password: always
+            state: present
+
+      rescue:
+        - name: RollBack Everything
+          ansible.builtin.debug:
+            msg: "Last Known Good Config"
+
+        - name: OLD Change Description on GE1
+          cisco.ios.ios_interfaces:
+            config:
+              - name: GigabitEthernet1
+                description: "Hello_GE1"
+
+        - name: OLD Configure the login banner
+          cisco.ios.ios_banner:
+            banner: login
+            text: "Any Damn Thing 1"
+            state: present
+      always:
+        - name: Inform Client
+          ansible.builtin.debug:
+            msg: "Device Tested"
+      when: ansible_network_os == "cisco.ios.ios"
+
+    # - name: Tasks for Juniper Devices
+    #   when: ansible_network_os == "junipernetworks.junos.junos"
+    #   block:
+    #     - name: Enable the netconf service on port 830
+    #       junipernetworks.junos.junos_netconf:
+    #         netconf_port: 830
+    #         state: present
+    #       vars:
+    #         ansible_connection: ansible.netcommon.network_cli
+
+    #     - name: Configure a MOTD banner
+    #       junipernetworks.junos.junos_banner:
+    #         banner: motd
+    #         text: This is an Ansible-managed node
+    #         state: present
+
+    #     - name: Disable the netconf service on port 830
+    #       vars:
+    #         ansible_connection: ansible.netcommon.network_cli
+    #       junipernetworks.junos.junos_netconf:
+    #         netconf_port: 830
+    #         state: absent

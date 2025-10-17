@@ -1,0 +1,14 @@
+---
+# handlers file for info_role
+#
+- name: Enough Sleep
+  ansible.builtin.debug:
+    msg: "Good Sleep Happy"
+
+- name: Info Folder Created
+  ansible.builtin.debug:
+    msg: "{{ info_role_folder }} Folder Created Successfully"
+
+- name: Info Collcted
+  ansible.builtin.debug:
+    msg: "{{ inventory_hostname }} Device Info Collected"
